@@ -96,24 +96,11 @@ public class RatesAdapter extends RecyclerView.Adapter<RatesAdapterHolder> {
             ratesAdapterHolder.getTitle().setText(serverRatesList.get(position).getKey());
             ratesAdapterHolder.getRateView().setText(String.valueOf(serverRatesList.get(position).getValue()));
             ratesAdapterHolder.getSubtitle().setText(serverRatesList.get(position).getFullCurrencyName());
-
             try {
                 ratesAdapterHolder.getRateCountryImage().setImageBitmap(BitmapFactory.decodeStream(context.getAssets().open(serverRatesList.get(position).getFlag())));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-//            try {
-//                // get input stream
-//                InputStream ims = context.getAssets().open(serverRatesList.get(position).getFullCurrencyName());
-//                // load image as Drawable
-//                Drawable d = Drawable.createFromStream(ims, null);
-//                // set image to ImageView
-//                ratesAdapterHolder.getRateCountryImage().setImageDrawable(d);
-//            }
-//            catch(IOException ex) {
-//                return;
-//            }
         }
 
         //Set click listener on text view holder

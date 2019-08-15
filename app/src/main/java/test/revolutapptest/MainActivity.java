@@ -21,6 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import test.revolutapptest.adapter.RatesAdapter;
+import test.revolutapptest.data.NamesAndFlags;
 import test.revolutapptest.server_data.Model;
 import test.revolutapptest.server_data.Rates;
 import test.revolutapptest.server_data.RequestDataInterface;
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private List<Rates> rates;
 
+    /**
+     * Names and flags list
+     */
     private List<NamesAndFlags> namesAndFlags = new ArrayList<>();
 
     /**
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextHolderClicked() {
 
                 //Tap on item in recycler will scroll recycler to top position
-                recyclerView.smoothScrollToPosition(0);
+                recyclerView.scrollToPosition(0);
 
                 //Helper flag
                 clicked = true;
@@ -176,10 +180,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Model> call, Throwable t) {
+
+                //TODO need to improve handling errors
                 if (t.getMessage().contains("No address associated with hostname")) {
                     Snackbar.make(findViewById(R.id.rl_main_view), "No internet connection", Snackbar.LENGTH_LONG).show();
                 }
-                repeatCall();
             }
         };
 
@@ -217,6 +222,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Get names and flags
+     *
+     * @return return names and flags
+     */
     public List<NamesAndFlags> getNamesAndFlags() {
         namesAndFlags.add(new NamesAndFlags("Australian dollar", "AUD.png"));
         namesAndFlags.add(new NamesAndFlags("Bulgarian lev", "BGN.png"));
